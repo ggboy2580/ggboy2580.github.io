@@ -10,7 +10,7 @@ body {
 
 .zodiac-grid {
     display: grid; /* 网格布局 */
-    grid-template-columns: repeat(6, 1fr);/* 四列，每列等宽 */
+    grid-template-columns: repeat(3, 1fr);/* 四列，每列等宽 */
     gap: 20px;/* 卡片之间的间距 */
     padding: 20px;/* 卡片之间的间距 */
 }
