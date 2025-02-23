@@ -1,0 +1,70 @@
+/* 基础样式 */
+body {
+    background: linear-gradient(45deg, #2c3e50, #3498db);
+    font-family: '微软雅黑', cursive;
+}
+
+.container h1 {/*标题文字居中 */
+    text-align: center;
+}
+
+.zodiac-grid {
+    display: grid; /* 网格布局 */
+    grid-template-columns: repeat(6, 1fr);/* 四列，每列等宽 */
+    gap: 20px;/* 卡片之间的间距 */
+    padding: 20px;/* 卡片之间的间距 */
+}
+
+.zodiac-card {
+    background: rgba(255,255,255,0.9);/* 卡片背景色 */
+    border-radius: 15px;/* 卡片圆角 */
+    padding: 15px;/* 卡片内边距 */
+    cursor: pointer;/* 鼠标悬停时显示手势 */
+    transition: transform 0.3s;/* 卡片悬停时动画 */
+}
+
+.zodiac-card:hover {
+    transform: translateY(-5px) rotate(3deg);/* 卡片悬停时动画 */
+    background: #fff;/* 卡片悬停时动画 */
+}
+
+.zodiac-card img {/* 卡片内图片样式,图片居中 */
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.zodiac-info{/* 卡片内文字样式 ,文字居中*/
+    text-align: center;
+    margin: 0;
+}
+/* 弹窗动画 */
+.love-modal {
+    display: none;
+    position: fixed;
+    background: rgba(0,0,0,0.7);
+    animation: fadeIn 0.5s;
+}
+
+.modal-content {
+    background: #fff;
+    padding: 30px;
+    border-radius: 20px;
+    max-width: 500px;
+}
+
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0; /* 动画开始时元素完全透明 */
+    }
+    to {
+        opacity: 1; /* 动画结束时元素完全不透明 */
+    }
+}
