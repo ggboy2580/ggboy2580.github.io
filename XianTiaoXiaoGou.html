@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>爱的通关挑战</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: '楷体', 'KaiTi', cursive;
+        }
+
+        body {
+            background-color: #ffe6f2;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            width: 800px;
+            height: 600px;
+            position: relative;
+            background: #ffb6c1;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        .scene-image {
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            max-width: 300px;
+            max-height: 200px;
+        }
+
+        .text-container {
+            position: absolute;
+            top: 10%;
+            width: 100%;
+            text-align: center;
+            font-size: 26px;
+            padding: 0 20px;
+            color: #333;
+        }
+
+        .buttons {
+            position: absolute;
+            bottom: 100px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 0px 0px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 20px;
+        }
+
+        .btn-accept {
+            background: #ff69b4;
+            color: white;
+        }
+
+        .btn-accept:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(255,105,180,0.5);
+        }
+
+        .btn-reject {
+            background: #dcdcdc;
+            color: #666;
+        }
+
+        .btn-reject:hover {
+            transform: scale(0.95);
+            opacity: 0.8;
+        }
+
+        .success-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 48px;
+            color: #ff0000;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.05); }
+            100% { transform: translate(-50%, -50%) scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img class="scene-image" id="sceneImage" alt="场景图片">
+        <div class="text-container" id="sceneText"></div>
+        <div class="buttons">
+            <button class="btn btn-accept" id="acceptBtn"></button>
+            <button class="btn btn-reject" id="rejectBtn"></button>
+        </div>
+    </div>
+
+    <script>
+        const SCENES = [
+            {
+                image: "images/kaixinaixin.gif",
+                text: "你是我清晨的第一缕阳光，可以和我在一起吗？",
+                accept: "好呀好呀",
+                reject: "再想想看",
+                acceptSize: [420, 140],
+                rejectSize: [100, 35]
+            },
+            {
+                image: "images/qidai.gif",
+                text: "我的世界因你而完整,可以成为我的恋人吗？",
+                accept: "那好吧",
+                reject: "不要啦",
+                acceptSize: [440, 150],
+                rejectSize: [80, 30]
+            },
+            {
+                image: "images/daotoudaku.gif",
+                text: "你是我存在的意义，可以和我在一起吗？",
+                accept: "马上同意",
+                reject: "下一题",
+                acceptSize: [460, 160],
+                rejectSize: [60, 25]
+            },
+            {
+                image: "images/nanguo.gif",
+                text: "没有你的人生不完整，可以和我在一起吗？",
+                accept: "立即确认",
+                reject: "跳过",
+                acceptSize: [480, 170],
+                rejectSize: [40, 20]
+            },
+            {
+                image: "images/chuini.gif",
+                text: "请给我照顾你的机会",
+                accept: "必须可以",
+                reject: "",
+                acceptSize: [500, 180],
+                rejectSize: [1, 1]
+            }
+        ];
+
+        let currentScene = 0;
+        const sceneImage = document.getElementById('sceneImage');
+        const sceneText = document.getElementById('sceneText');
+        const acceptBtn = document.getElementById('acceptBtn');
+        const rejectBtn = document.getElementById('rejectBtn');
+
+        function updateScene() {
+          const scene = SCENES[currentScene];
+
+          sceneImage.src = scene.image;
+          sceneText.textContent = scene.text;
+
+          // 更新接受按钮
+          acceptBtn.textContent = scene.accept;
+          acceptBtn.style.width = scene.acceptSize[0] + 'px';
+          acceptBtn.style.height = scene.acceptSize[1] + 'px';
+          const acceptFontSize = Math.max(12, scene.acceptSize[1] / 2);
+          acceptBtn.style.fontSize = `${acceptFontSize}px`;
+
+          // 更新拒绝按钮
+          rejectBtn.textContent = scene.reject;
+          rejectBtn.style.width = scene.rejectSize[0] + 'px';
+          rejectBtn.style.height = scene.rejectSize[1] + 'px';
+          const rejectFontSize = Math.max(10, scene.rejectSize[1] * 0.4);
+          rejectBtn.style.fontSize = `${rejectFontSize}px`;
+
+          // 隐藏最后一个场景的拒绝按钮
+          rejectBtn.style.visibility = currentScene === SCENES.length - 1 ? 'hidden' : 'visible';
+
+          // 添加文字自适应调整
+          autoScaleText(acceptBtn);
+          autoScaleText(rejectBtn);
+      }
+
+      // 辅助函数：确保文字不超出按钮
+      function autoScaleText(button) {
+          const text = button.textContent;
+          const maxWidth = button.offsetWidth - 20; // 留10px边距
+          let fontSize = parseFloat(button.style.fontSize);
+
+          // 创建测量元素
+          const measure = document.createElement('span');
+          measure.style.position = 'absolute';
+          measure.style.whiteSpace = 'nowrap';
+          measure.style.visibility = 'hidden';
+          measure.style.font = `bold ${fontSize}px 楷体`;
+          measure.textContent = text;
+          document.body.appendChild(measure);
+
+          // 调整字体大小
+          while (measure.offsetWidth > maxWidth && fontSize > 12) {
+              fontSize -= 1;
+              measure.style.fontSize = `${fontSize}px`;
+          }
+
+          button.style.fontSize = `${fontSize}px`;
+          document.body.removeChild(measure);
+      }
+
+        function showSuccess() {
+            sceneImage.src = 'images/cece.gif';
+            sceneText.innerHTML = '<div class="success-text">我们成功在一起啦！❤</div>';
+            acceptBtn.style.display = 'none';
+            rejectBtn.style.display = 'none';
+        }
+
+        acceptBtn.addEventListener('click', showSuccess);
+
+        rejectBtn.addEventListener('click', () => {
+            if (currentScene < SCENES.length - 1) {
+                currentScene++;
+                updateScene();
+            }
+        });
+
+        // 初始化第一个场景
+        updateScene();
+    </script>
+</body>
+</html>
