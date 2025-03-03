@@ -162,7 +162,48 @@
     </div>
 
     <script>
-        const SCENES = [/* 保持原有场景数据不变 */];
+        const SCENES = [
+            {
+                image: "images/kaixinaixin.gif",
+                text: "你是我清晨的第一缕阳光，可以和我在一起吗？",
+                accept: "好呀好呀",
+                reject: "再想想看",
+                acceptSize: [420, 140],
+                rejectSize: [100, 35]
+            },
+            {
+                image: "images/qidai.gif",
+                text: "我的世界因你而完整,可以成为我的恋人吗？",
+                accept: "那好吧",
+                reject: "不要啦",
+                acceptSize: [440, 150],
+                rejectSize: [80, 30]
+            },
+            {
+                image: "images/daotoudaku.gif",
+                text: "你是我存在的意义，可以和我在一起吗？",
+                accept: "马上同意",
+                reject: "下一题",
+                acceptSize: [460, 160],
+                rejectSize: [60, 25]
+            },
+            {
+                image: "images/nanguo.gif",
+                text: "没有你的人生不完整，可以和我在一起吗？",
+                accept: "立即确认",
+                reject: "跳过",
+                acceptSize: [480, 170],
+                rejectSize: [40, 20]
+            },
+            {
+                image: "images/chuini.gif",
+                text: "请给我照顾你的机会",
+                accept: "必须可以",
+                reject: "",
+                acceptSize: [500, 180],
+                rejectSize: [1, 1]
+            }
+        ];
 
         // 初始化变量
         let currentScene = 0;
