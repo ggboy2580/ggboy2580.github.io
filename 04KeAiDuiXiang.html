@@ -67,7 +67,7 @@
         }
         
         .text-bubble p {
-            font-size: 1.5rem;
+            font-size: 2.5rem;
             line-height: 1.8;
             color: #5a4a6a;
             text-shadow: 0 2px 4px rgba(255,255,255,0.5);
@@ -76,8 +76,8 @@
         
         /* 表情包动态布局 */
         .emoji {
-            width: 80px;
-            height: 80px;
+            width: 160px;
+            height: 160px;
             position: absolute;
             bottom: -30px;
             right: -20px;
@@ -90,24 +90,24 @@
         }
         
        /* 导航容器增强 */
-.nav-container {
-    position: fixed;
-    bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 18px;
-    padding: 16px;
-    background: rgba(255, 255, 255, 0.75);
-    backdrop-filter: blur(20px) saturate(180%);
-    border-radius: 24px;
+       .nav-container {
+    position: fixed;         /* 固定定位在视口中 */
+    bottom: 40px;            /* 距离底部40像素 */
+    left: 50%;               /* 水平居中定位 */
+    transform: translateX(-50%); /* 精确水平居中 */
+    display: flex;           /* 弹性布局排列按钮 */
+    gap: 18px;               /* 按钮间距18像素 */
+    padding: 16px;           /* 内边距 */
+    background: rgba(255, 255, 255, 0.75); /* 75%透明度的白色背景 */
+    backdrop-filter: blur(20px) saturate(180%); /* 背景模糊和饱和度增强 */
+    border-radius: 24px;      /* 圆角半径 */
     box-shadow: 
-        0 12px 40px rgba(0,0,0,0.08),
-        inset 0 0 0 1px rgba(255,255,255,0.2);
-    border: 1px solid rgba(255,255,255,0.3);
-    min-width: 60vw;
-    justify-content: center;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+        0 12px 40px rgba(0,0,0,0.08),  /* 外阴影 */
+        inset 0 0 0 1px rgba(255,255,255,0.2); /* 内发光边框效果 */
+    border: 1px solid rgba(255,255,255,0.3); /* 半透明边框 */
+    min-width: 90vw;         /* 最小宽度为视口宽度60% */
+    justify-content: center; /* 子元素水平居中 */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1); /* 平滑动画过渡 */
 }
 
 /* 悬浮态容器动效 */
@@ -120,26 +120,26 @@
 
 /* 按钮质感升级 */
 .nav-container button {
-    padding: 18px 36px;
-    border: none;
+    padding: 18px 36px;            /* 按钮内边距：上下18px 左右36px */
+    border: none;                   /* 去除默认边框 */
     background: 
-        linear-gradient(145deg, 
-            rgba(255,255,255,0.9) 0%,
-            rgba(255,255,255,0.6) 100%);
-    color: var(--secondary-color);
-    border-radius: 18px;
-    cursor: pointer;
-    transition: 
-        transform 0.3s ease,
-        box-shadow 0.3s ease,
-        background 0.4s ease;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    font-size: 1.1em;
-    white-space: nowrap;
+        linear-gradient(145deg,     /* 145度渐变背景 */
+            rgba(255,255,255,0.9) 0%,   /* 顶部90%透明白 */
+            rgba(255,255,255,0.6) 100%);/* 底部60%透明白 */
+    color: var(--secondary-color);  /* 使用次级主题色 */
+    border-radius: 18px;            /* 圆角半径18px */
+    cursor: pointer;                /* 鼠标手型指针 */
+    transition:                     /* 多属性过渡动画 */
+        transform 0.3s ease,        /* 变形效果0.3秒缓动 */
+        box-shadow 0.3s ease,       /* 阴影变化0.3秒缓动 */
+        background 0.4s ease;       /* 背景渐变0.4秒缓动 */
+    font-weight: 600;               /* 中等加粗字体 */
+    letter-spacing: 0.5px;          /* 字间距扩大0.5px */
+    font-size: 2.2em;               /* 1.1倍基准字号 */
+    white-space: nowrap;            /* 禁止文字换行 */
     box-shadow: 
-        0 4px 12px rgba(0,0,0,0.05),
-        inset 0 1px 0 rgba(255,255,255,0.8);
+        0 4px 12px rgba(0,0,0,0.05), /* 外阴影：柔和投影 */
+        inset 0 1px 0 rgba(255,255,255,0.8); /* 内阴影：顶部高光 */
 }
 
 /* 按钮悬浮态 */
