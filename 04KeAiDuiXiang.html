@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>我们的记忆盒子</title>
+    <style>
+        :root {
+            --primary-color: #ff7eb4;
+            --secondary-color: #6c5b7b;
+            --glass-effect: linear-gradient(120deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%);
+        }
+        
+        body {
+            background: linear-gradient(135deg, #fff5f8 0%, #f8f4ff 100%);
+            font-family: 'Microsoft YaHei', sans-serif;
+            overflow-x: hidden;
+        }
+        
+        /* 响应式图片容器 */
+        .image-container {
+            position: relative;
+            max-width: 600px;
+            margin: 20px auto;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .main-image {
+            width: 100%;
+            height: 60vh;
+            object-fit: cover;
+            object-position: center;
+            filter: drop-shadow(0 4px 15px rgba(0,0,0,0.1));
+        }
+        
+        /* 文字气泡增强 */
+        .text-bubble {
+            position: relative;
+            max-width: 80%;
+            margin: 2rem auto;
+            padding: 1.5rem;
+            background: var(--glass-effect);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        
+        .text-bubble::before {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: var(--glass-effect);
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%) rotate(45deg);
+            z-index: -1;
+        }
+        
+        .text-bubble p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #5a4a6a;
+            text-shadow: 0 2px 4px rgba(255,255,255,0.5);
+        }
+        
+        /* 表情包动态布局 */
+        .emoji {
+            width: 80px;
+            height: 80px;
+            position: absolute;
+            bottom: -30px;
+            right: -20px;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+            transition: transform 0.3s ease;
+        }
+        
+        .emoji:hover {
+            transform: scale(1.1) rotate(-5deg);
+        }
+        
+        /* 导航按钮重设计 */
+        .nav-container {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: inline-flex;
+            gap: 15px;
+            padding: 12px 25px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(8px);
+            border-radius: 50px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+        
+        .nav-container button {
+            padding: 12px 25px;
+            border: none;
+            background: var(--glass-effect);
+            color: var(--secondary-color);
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+        
+        .nav-container button:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255,126,180,0.3);
+        }
+        
+        /* 移动端优化 */
+        @media (max-width: 768px) {
+            .main-image {
+                height: 45vh;
+            }
+        
+            .text-bubble {
+                max-width: 90%;
+                padding: 1rem;
+                margin: 1rem auto;
+            }
+        
+            .emoji {
+                width: 60px;
+                height: 60px;
+                bottom: -20px;
+            }
+        
+            .nav-container {
+                bottom: 15px;
+                padding: 8px 15px;
+                gap: 8px;
+            }
+        
+            .nav-container button {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* 页面切换动画 */
+        .page {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        
+        .active-page {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- 页面1：云端童话 -->
+    <section id="page1" class="page active-page">
+        <img src="images/BoLiQiao.jpg" alt="玻璃栈道" class="main-image">
+        <div class="text-bubble">
+            <p>玻璃栈道上的小耳朵骑士，你站在云端回眸的瞬间，我的世界就定格成了最清澈的童话。纵使脚下万丈斑斓，只要有你攥着衣角，连心跳声都是最安心的节拍。</p>
+            <img src="images/cece.gif" class="emoji" alt="北极熊表情">
+        </div>
+    </section>
+
+    <!-- 页面2：温度记忆 -->
+    <section id="page2" class="page">
+        <img src="images/CheShangYangGuang.jpg" alt="毛衣时光" class="main-image">
+        <div class="text-bubble">
+            <p>毛衣的褶皱藏着我们的温度，项链摇晃的微光里住着心跳的频率。即使车窗外的风景都虚化，你发梢卷起的弧度永远是我目光的锚点。.</p>
+            <img src="images/qidai.gif" class="emoji" alt="垂耳兔表情">
+        </div>
+    </section>
+
+    <!-- 页面3：疗愈时刻 -->
+    <section id="page3" class="page">
+        <img src="images/ShengBingNanShou.jpg" alt="疗愈时光" class="main-image">
+        <div class="text-bubble">
+            <p>绷带裹不住你眼里的星河，这副眼镜倒映的，是我正在笨拙却坚定地学着把心跳缠成守护你的蝴蝶结。</p>
+            <img src="images/Shuixing.gif" class="emoji" alt="猫咪表情">
+        </div>
+    </section>
+
+    <!-- 页面4：甜心魔法 -->
+    <section id="page4" class="page">
+        <img src="images/DanGaoBiXin.jpg" alt="爱心蛋糕" class="main-image">
+        <div class="text-bubble">
+            <p>你指尖的爱心魔法刚点亮这个角落，Hello Kitty的甜度就输了三分——原来蕾丝褶皱里藏着的，是我们用晚安吻称量过温柔时光。</p>
+            <img src="images/SongHua.gif" class="emoji" alt="蛋糕猫表情">
+        </div>
+    </section>
+
+    <!-- 底部导航 -->
+    <nav class="nav-container">
+        <button onclick="showPage(1)">云端童话</button>
+        <button onclick="showPage(2)">温度记忆</button>
+        <button onclick="showPage(3)">疗愈时刻</button>
+        <button onclick="showPage(4)">甜心魔法</button>
+    </nav>
+
+    <script>
+        
+        // 页面切换逻辑
+        function showPage(pageNumber) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active-page');
+            });
+            document.getElementById(`page${pageNumber}`).classList.add('active-page');
+        }
+
+        // 初始化特效
+        document.querySelectorAll('.text-bubble').forEach(bubble => {
+            bubble.style.background = 'linear-gradient(45deg, rgba(255,255,255,0.8), rgba(255,255,255,0.3))';
+        });
+        
+        document.body.addEventListener('mousemove', (e) => {
+    const particles = document.createElement('div');
+    particles.style.cssText = `
+        position: fixed;
+        width: 4px;
+        height: 4px;
+        background: ${Math.random() > 0.5 ? 'var(--primary-color)' : 'var(--secondary-color)'};
+        border-radius: 50%;
+        pointer-events: none;
+        left: ${e.pageX}px;
+        top: ${e.pageY}px;
+        transition: transform 0.3s, opacity 1s;
+    `;
+    document.body.appendChild(particles);
+    
+    setTimeout(() => {
+        particles.style.transform = 'scale(2)';
+        particles.style.opacity = '0';
+        setTimeout(() => particles.remove(), 1000);
+    }, 50);
+});
+        
+
+        
+    </script>
+</body>
+</html>
